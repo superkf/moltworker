@@ -1,0 +1,12 @@
+{
+  "lastChecks": {
+    "email": null,
+    "calendar": null,
+    "weather": null,
+    "prices": null
+  },
+  "tweetCount": {
+    "date": null,
+    "count": 0
+  }
+}
