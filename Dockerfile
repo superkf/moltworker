@@ -16,7 +16,10 @@ RUN npm install -g pnpm
 
 # Install moltbot (CLI is still named clawdbot until upstream renames)
 # Pin to specific version for reproducible builds
-RUN npm install -g clawdbot@2026.1.24-3 \
+RUN git clone https://github.com/superkf/big_fork.git /tmp/clawdbot \
+    && cd /tmp/clawdbot \
+    && npm install \
+    && npm link \
     && clawdbot --version
 
 # Create moltbot directories (paths still use clawdbot until upstream renames)
