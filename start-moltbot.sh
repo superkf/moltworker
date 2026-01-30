@@ -131,6 +131,36 @@ else
 fi
 
 # ============================================================
+# SYNC MEMORY FROM GITHUB (bigfork-memory repo)
+# ============================================================
+MEMORY_REPO="https://github.com/superkf/bigfork-memory.git"
+MEMORY_DIR="/root/clawd/sync"
+WORKSPACE_DIR="/root/clawd"
+
+echo "Syncing memory from GitHub..."
+
+if [ -d "$MEMORY_DIR/.git" ]; then
+    echo "Memory repo exists, pulling latest..."
+    cd "$MEMORY_DIR" && git pull origin main || echo "Git pull failed, using existing"
+else
+    echo "Cloning memory repo..."
+    git clone "$MEMORY_REPO" "$MEMORY_DIR" || echo "Git clone failed, using Docker defaults"
+fi
+
+# Copy dynamic files from sync to workspace (if clone succeeded)
+if [ -d "$MEMORY_DIR/memory" ]; then
+    echo "Copying memory files to workspace..."
+    cp -r "$MEMORY_DIR/memory" "$WORKSPACE_DIR/"
+    cp -f "$MEMORY_DIR/MEMORY.md" "$WORKSPACE_DIR/" 2>/dev/null || true
+    cp -f "$MEMORY_DIR/HEARTBEAT.md" "$WORKSPACE_DIR/" 2>/dev/null || true
+    cp -f "$MEMORY_DIR"/*.mjs "$WORKSPACE_DIR/" 2>/dev/null || true
+    cp -f "$MEMORY_DIR"/*.py "$WORKSPACE_DIR/" 2>/dev/null || true
+    echo "Memory sync complete"
+fi
+
+cd "$WORKSPACE_DIR"
+
+# ============================================================
 # UPDATE CONFIG FROM ENVIRONMENT VARIABLES
 # ============================================================
 node << EOFNODE
