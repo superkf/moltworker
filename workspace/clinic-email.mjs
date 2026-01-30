@@ -1,9 +1,12 @@
 import nodemailer from 'nodemailer';
 import Imap from 'imap';
 import { simpleParser } from 'mailparser';
+import { config } from 'dotenv';
 
-const EMAIL = 'qihatc@gmail.com';
-const PASS = 'ypmi jxud bpjj unlb';
+config(); // Load .env
+
+const EMAIL = process.env.CLINIC_EMAIL || 'qihatc@gmail.com';
+const PASS = process.env.CLINIC_PASS;
 
 // Send email
 export async function sendEmail(to, subject, body, attachments = []) {

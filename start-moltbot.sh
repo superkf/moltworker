@@ -131,6 +131,28 @@ else
 fi
 
 # ============================================================
+# CREATE .env FROM ENVIRONMENT VARIABLES
+# ============================================================
+# Cloudflare Worker secrets are passed as env vars
+# Write them to .env for scripts to read
+
+ENV_FILE="/root/clawd/.env"
+echo "Creating .env from environment variables..."
+
+cat > "$ENV_FILE" << EOFENV
+# Auto-generated from Cloudflare Worker secrets
+GMAIL_USER=${GMAIL_USER:-}
+GMAIL_PASS=${GMAIL_PASS:-}
+CLINIC_EMAIL=${CLINIC_EMAIL:-}
+CLINIC_PASS=${CLINIC_PASS:-}
+KRAKEN_API_KEY=${KRAKEN_API_KEY:-}
+KRAKEN_API_SECRET=${KRAKEN_API_SECRET:-}
+EOFENV
+
+chmod 600 "$ENV_FILE"
+echo ".env created"
+
+# ============================================================
 # SYNC MEMORY FROM GITHUB (bigfork-memory repo)
 # ============================================================
 MEMORY_REPO="https://github.com/superkf/bigfork-memory.git"

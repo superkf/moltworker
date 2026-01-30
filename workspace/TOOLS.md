@@ -5,18 +5,17 @@ Skills define *how* tools work. This file is for *your* specifics — the stuff 
 ## Email Accounts
 
 ### Personal (fengbo0724@gmail.com)
-- App Password: `cphk juwb hqtc zqps`
+- Credentials: `$GMAIL_USER`, `$GMAIL_PASS` (from .env)
 - Use for: Personal correspondence, report cards
 
 ### Clinic (qihatc@gmail.com)
-- App Password: `ypmi jxud bpjj unlb`
+- Credentials: `$CLINIC_EMAIL`, `$CLINIC_PASS` (from .env)
 - Use for: Clinic emails, patient scheduling
 - Script: `node clinic-email.mjs`
 - Calendar: Google Calendar for appointments
 
 ## Kraken API
-- API Key: `6fRqQvkfJkItEmtp9vgg0uCPWedMqSIradbb+A9wH6/iMOCwKa2uZFKA`
-- API Secret: `/dWq39ogunnC41vUM4zu+zIWoOvwq/hQClgR/Ex4LEFULYFdja9LgQZx2Phy5sU05OKBF8okmY/T7kywACcV1Q==`
+- Credentials: `$KRAKEN_API_KEY`, `$KRAKEN_API_SECRET` (from .env)
 
 ## Scripts
 

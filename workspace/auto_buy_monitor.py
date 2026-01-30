@@ -5,6 +5,7 @@
 - SOL < $114 → 买入 50% USDC
 """
 
+import os
 import requests
 import urllib.parse
 import hashlib
@@ -12,9 +13,12 @@ import hmac
 import base64
 import time
 import json
+from dotenv import load_dotenv
 
-api_key = '6fRqQvkfJkItEmtp9vgg0uCPWedMqSIradbb+A9wH6/iMOCwKa2uZFKA'
-api_secret = '/dWq39ogunnC41vUM4zu+zIWoOvwq/hQClgR/Ex4LEFULYFdja9LgQZx2Phy5sU05OKBF8okmY/T7kywACcV1Q=='
+load_dotenv()  # Load .env
+
+api_key = os.getenv('KRAKEN_API_KEY')
+api_secret = os.getenv('KRAKEN_API_SECRET')
 
 # Trigger prices
 ETH_BUY_TRIGGER = 2700

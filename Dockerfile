@@ -30,7 +30,7 @@ RUN mkdir -p /root/.clawdbot \
     && mkdir -p /root/clawd/skills
 
 # Copy startup script
-# Build cache bust: 2026-01-30-v28-memory-sync
+# Build cache bust: 2026-01-30-v29-env-secrets
 COPY start-moltbot.sh /usr/local/bin/start-moltbot.sh
 RUN chmod +x /usr/local/bin/start-moltbot.sh
 
@@ -44,10 +44,10 @@ COPY skills/ /root/clawd/skills/
 COPY workspace/ /root/clawd/
 
 # Install email dependencies for clinic-email.mjs
-RUN cd /root/clawd && npm init -y && npm install nodemailer imap mailparser
+RUN cd /root/clawd && npm init -y && npm install nodemailer imap mailparser dotenv
 
 # Install Python dependencies for auto_buy_monitor.py
-RUN pip3 install requests --break-system-packages && ln -sf /usr/bin/python3 /usr/bin/python
+RUN pip3 install requests python-dotenv --break-system-packages && ln -sf /usr/bin/python3 /usr/bin/python
 
 # Set working directory
 WORKDIR /root/clawd
