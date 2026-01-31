@@ -51,23 +51,10 @@ export function createAccessMiddleware(options: AccessMiddlewareOptions) {
     const teamDomain = c.env.CF_ACCESS_TEAM_DOMAIN;
     const expectedAud = c.env.CF_ACCESS_AUD;
 
-    // Check if CF Access is configured
+    // Check if CF Access is configured - if not, skip auth (allow open access)
     if (!teamDomain || !expectedAud) {
-      if (type === 'json') {
-        return c.json({
-          error: 'Cloudflare Access not configured',
-          hint: 'Set CF_ACCESS_TEAM_DOMAIN and CF_ACCESS_AUD environment variables',
-        }, 500);
-      } else {
-        return c.html(`
-          <html>
-            <body>
-              <h1>Admin UI Not Configured</h1>
-              <p>Set CF_ACCESS_TEAM_DOMAIN and CF_ACCESS_AUD environment variables.</p>
-            </body>
-          </html>
-        `, 500);
-      }
+      c.set('accessUser', { email: 'anonymous@local', name: 'Anonymous' });
+      return next();
     }
 
     // Get JWT
