@@ -48,7 +48,7 @@ COPY workspace/ /root/clawd/
 RUN cd /root/clawd && npm init -y && npm install nodemailer imap mailparser dotenv
 
 # Install Python dependencies for auto_buy_monitor.py
-RUN pip3 install requests python-dotenv --break-system-packages && ln -sf /usr/bin/python3 /usr/bin/python
+RUN pip3 install requests python-dotenv && ln -sf /usr/bin/python3 /usr/bin/python
 
 # Set working directory
 WORKDIR /root/clawd
