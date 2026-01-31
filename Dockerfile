@@ -16,7 +16,7 @@ RUN npm install -g pnpm
 
 # Install moltbot (CLI is still named clawdbot until upstream renames)
 # Pin to specific version for reproducible builds
-RUN git clone https://github.com/superkf/big_fork.git /tmp/clawdbot \
+RUN git clone https://github.com/roerohan/openclaw.git /tmp/clawdbot \
     && cd /tmp/clawdbot \
     && npm install \
     && npm link \
