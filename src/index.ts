@@ -59,13 +59,14 @@ function validateRequiredEnv(env: MoltbotEnv): string[] {
     missing.push('MOLTBOT_GATEWAY_TOKEN');
   }
 
-  if (!env.CF_ACCESS_TEAM_DOMAIN) {
-    missing.push('CF_ACCESS_TEAM_DOMAIN');
-  }
+  // CF Access is optional - only validate if partially configured
+  // if (!env.CF_ACCESS_TEAM_DOMAIN) {
+  //   missing.push('CF_ACCESS_TEAM_DOMAIN');
+  // }
 
-  if (!env.CF_ACCESS_AUD) {
-    missing.push('CF_ACCESS_AUD');
-  }
+  // if (!env.CF_ACCESS_AUD) {
+  //   missing.push('CF_ACCESS_AUD');
+  // }
 
   // Check for AI Gateway or direct Anthropic configuration
   if (env.AI_GATEWAY_API_KEY) {
