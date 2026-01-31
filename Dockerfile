@@ -18,7 +18,8 @@ RUN npm install -g pnpm
 # Pin to specific version for reproducible builds
 RUN git clone https://github.com/roerohan/openclaw.git /tmp/openclaw \
     && cd /tmp/openclaw \
-    && npm install \
+    && pnpm install \
+    && pnpm build \
     && npm link \
     && openclaw --version
 
