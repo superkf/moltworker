@@ -325,6 +325,35 @@ console.log('Config:', JSON.stringify(config, null, 2));
 EOFNODE
 
 # ============================================================
+# CREATE AUTH PROFILES FOR API KEYS
+# ============================================================
+# OpenClaw requires API keys in auth-profiles.json, not just env vars
+AUTH_DIR="/root/.openclaw/agents/main/agent"
+AUTH_FILE="$AUTH_DIR/auth-profiles.json"
+
+mkdir -p "$AUTH_DIR"
+
+if [ -n "$ANTHROPIC_API_KEY" ]; then
+    echo "Setting up Anthropic API key in auth store..."
+    cat > "$AUTH_FILE" << EOFAUTH
+{
+  "profiles": {
+    "default": {
+      "anthropic": {
+        "apiKey": "$ANTHROPIC_API_KEY"
+      }
+    }
+  },
+  "activeProfile": "default"
+}
+EOFAUTH
+    chmod 600 "$AUTH_FILE"
+    echo "Auth profile created at $AUTH_FILE"
+else
+    echo "WARNING: ANTHROPIC_API_KEY not set, agent will not be able to respond"
+fi
+
+# ============================================================
 # START GATEWAY
 # ============================================================
 # Note: R2 backup sync is handled by the Worker's cron trigger
