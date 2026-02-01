@@ -242,6 +242,17 @@ if (process.env.TELEGRAM_BOT_TOKEN) {
     config.channels.telegram.dmPolicy = process.env.TELEGRAM_DM_POLICY || 'pairing';
     // Clean up any legacy 'dm' key that causes validation errors
     delete config.channels.telegram.dm;
+
+    // Configure webhook mode if WORKER_URL is set (required for Cloudflare Sandbox)
+    // Without webhook, the bot uses long polling which doesn't work when the container sleeps
+    if (process.env.WORKER_URL) {
+        const workerUrl = process.env.WORKER_URL.replace(/\/+$/, ''); // Remove trailing slash
+        config.channels.telegram.webhookUrl = workerUrl + '/telegram-webhook';
+        config.channels.telegram.webhookPath = '/telegram-webhook';
+        console.log('Telegram webhook configured:', config.channels.telegram.webhookUrl);
+    } else {
+        console.log('WARNING: WORKER_URL not set - Telegram will use polling mode (may not work reliably in Cloudflare Sandbox)');
+    }
 }
 
 // Discord configuration

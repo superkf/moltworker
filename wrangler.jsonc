@@ -81,6 +81,9 @@
   // - SLACK_APP_TOKEN: (optional) Slack app token
   // - MOLTBOT_GATEWAY_TOKEN: (optional) Token to protect gateway access, if unset device pairing will be used
   // - CDP_SECRET: (optional) Shared secret for /cdp endpoint authentication
+  // - WORKER_URL: (REQUIRED for Telegram) Your worker's public URL (e.g., https://moltbot-sandbox.your-subdomain.workers.dev)
+  //               This is needed for Telegram webhook mode. Without it, Telegram uses polling which doesn't work
+  //               reliably when the Cloudflare Sandbox container sleeps.
   //
   // R2 persistent storage secrets (required for data persistence across sessions):
   // - R2_ACCESS_KEY_ID: R2 access key ID (from R2 API tokens)
