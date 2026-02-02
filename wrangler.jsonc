@@ -62,9 +62,9 @@
       "bucket_name": "moltbot-data",
     },
   ],
-  // Cron trigger to sync moltbot data to R2 every 5 minutes
+  // Cron trigger for keep-alive health check and R2 backup every 1 minute
   "triggers": {
-    "crons": ["*/5 * * * *"],
+    "crons": ["* * * * *"],
   },
   // Browser Rendering binding for CDP shim
   "browser": {
