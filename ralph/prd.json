@@ -1,0 +1,44 @@
+{
+  "project": "moltworker",
+  "branchName": "ralph/local-cloud-memory-sync",
+  "description": "Local-Cloud Bidirectional Memory Sync - Enable seamless memory state transfer between local and cloud openclaw instances",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Create start-local.sh with bidirectional sync",
+      "description": "As a user, I want a single script that syncs memory from GitHub on startup and pushes changes on shutdown, so I can seamlessly switch between local and cloud.",
+      "acceptanceCriteria": [
+        "Script located at workspace/start-local.sh",
+        "On startup: clone bigfork-memory to workspace/sync/ if not exists",
+        "On startup: git pull origin main in sync directory",
+        "On startup: copy sync/memory/* to workspace/memory/",
+        "On startup: copy sync/MEMORY.md and sync/HEARTBEAT.md to workspace/",
+        "On startup: write ISO timestamp to workspace/memory/.last-active",
+        "Trap EXIT/SIGTERM signals for shutdown handler",
+        "On shutdown: read .last-active-cloud, skip push if cloud active within 30 min",
+        "On shutdown: copy workspace/memory/* to sync/memory/",
+        "On shutdown: copy workspace/MEMORY.md and HEARTBEAT.md to sync/",
+        "On shutdown: git add -A && git commit && git push (skip if no changes)",
+        "All git failures log warning but do not block",
+        "Script starts openclaw gateway after sync completes",
+        "shellcheck passes with no errors"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "Add sync directory to gitignore",
+      "description": "As a developer, I want workspace/sync/ ignored by git so the cloned bigfork-memory repo doesn't get committed to moltworker.",
+      "acceptanceCriteria": [
+        "workspace/.gitignore includes sync/ entry",
+        "Existing .gitignore entries preserved",
+        "No other files affected"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}

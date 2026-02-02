@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:moltbot-sandbox.fengbo0724.workers.dev)",
+      "Bash(git push:*)",
+      "Bash(gh repo view:*)"
+    ]
+  }
+}

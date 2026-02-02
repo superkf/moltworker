@@ -1,0 +1,4 @@
+# Ralph Progress Log
+# Feature: local-cloud-memory-sync
+# Started: 2026-01-31
+

@@ -57,5 +57,14 @@ export function buildEnvVars(env: MoltbotEnv): Record<string, string> {
   if (env.CDP_SECRET) envVars.CDP_SECRET = env.CDP_SECRET;
   if (env.WORKER_URL) envVars.WORKER_URL = env.WORKER_URL;
 
+  // Container .env secrets (for scripts inside container)
+  if (env.GMAIL_USER) envVars.GMAIL_USER = env.GMAIL_USER;
+  if (env.GMAIL_PASS) envVars.GMAIL_PASS = env.GMAIL_PASS;
+  if (env.CLINIC_EMAIL) envVars.CLINIC_EMAIL = env.CLINIC_EMAIL;
+  if (env.CLINIC_PASS) envVars.CLINIC_PASS = env.CLINIC_PASS;
+  if (env.KRAKEN_API_KEY) envVars.KRAKEN_API_KEY = env.KRAKEN_API_KEY;
+  if (env.KRAKEN_API_SECRET) envVars.KRAKEN_API_SECRET = env.KRAKEN_API_SECRET;
+  if (env.POLYMARKET_API_KEY) envVars.POLYMARKET_API_KEY = env.POLYMARKET_API_KEY;
+
   return envVars;
 }
