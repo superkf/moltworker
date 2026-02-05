@@ -38,6 +38,7 @@ export interface MoltbotEnv {
   KRAKEN_API_KEY?: string;
   KRAKEN_API_SECRET?: string;
   POLYMARKET_API_KEY?: string;
+  ETHERSCAN_API_KEY?: string;
   // R2 credentials for bucket mounting (set via wrangler secret)
   R2_ACCESS_KEY_ID?: string;
   R2_SECRET_ACCESS_KEY?: string;

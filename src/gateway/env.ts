@@ -65,6 +65,7 @@ export function buildEnvVars(env: MoltbotEnv): Record<string, string> {
   if (env.KRAKEN_API_KEY) envVars.KRAKEN_API_KEY = env.KRAKEN_API_KEY;
   if (env.KRAKEN_API_SECRET) envVars.KRAKEN_API_SECRET = env.KRAKEN_API_SECRET;
   if (env.POLYMARKET_API_KEY) envVars.POLYMARKET_API_KEY = env.POLYMARKET_API_KEY;
+  if (env.ETHERSCAN_API_KEY) envVars.ETHERSCAN_API_KEY = env.ETHERSCAN_API_KEY;
 
   return envVars;
 }
