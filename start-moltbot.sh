@@ -260,11 +260,15 @@ if (process.env.TELEGRAM_BOT_TOKEN) {
 
     // Configure webhook mode if WORKER_URL is set (required for Cloudflare Sandbox)
     // Without webhook, the bot uses long polling which doesn't work when the container sleeps
+    // OpenClaw webhook server listens on port 8787
     if (process.env.WORKER_URL) {
         const workerUrl = process.env.WORKER_URL.replace(/\/+$/, ''); // Remove trailing slash
         config.channels.telegram.webhookUrl = workerUrl + '/telegram-webhook';
         config.channels.telegram.webhookPath = '/telegram-webhook';
+        // webhookSecret is required for webhook mode - use bot token as secret
+        config.channels.telegram.webhookSecret = process.env.TELEGRAM_BOT_TOKEN;
         console.log('Telegram webhook configured:', config.channels.telegram.webhookUrl);
+        console.log('Telegram webhook server will listen on port 8787');
     } else {
         console.log('WARNING: WORKER_URL not set - Telegram will use polling mode (may not work reliably in Cloudflare Sandbox)');
     }
