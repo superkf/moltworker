@@ -379,6 +379,20 @@ else
 fi
 
 # ============================================================
+# REGISTER TELEGRAM WEBHOOK
+# ============================================================
+# OpenClaw doesn't automatically register webhook with Telegram API
+# We need to call setWebhook manually on container startup
+if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$WORKER_URL" ]; then
+    WEBHOOK_URL="${WORKER_URL%/}/telegram-webhook"
+    echo "Registering Telegram webhook: $WEBHOOK_URL"
+    curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook" \
+        -H "Content-Type: application/json" \
+        -d "{\"url\": \"${WEBHOOK_URL}\"}" || echo "Warning: Failed to set Telegram webhook"
+    echo ""
+fi
+
+# ============================================================
 # START GATEWAY
 # ============================================================
 # Note: R2 backup sync is handled by the Worker's cron trigger
