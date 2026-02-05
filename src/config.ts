@@ -6,7 +6,8 @@
 export const MOLTBOT_PORT = 18789;
 
 /** Port that the Telegram webhook server listens on inside the container */
-export const TELEGRAM_WEBHOOK_PORT = 8787;
+// OpenClaw gateway handles webhook on the same port as the main gateway
+export const TELEGRAM_WEBHOOK_PORT = 18789;
 
 /** Path for Telegram webhook endpoint */
 export const TELEGRAM_WEBHOOK_PATH = '/telegram-webhook';
